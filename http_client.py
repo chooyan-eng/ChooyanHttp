@@ -10,6 +10,7 @@ class ChooyanHttpClient:
 
         request_str = 'GET / HTTP/1.1\nHost: %s\r\n\r\n' % (host)
         s.send(request_str.encode('utf-8'))
+        response = s.recv(4096)
 
         return response
 
