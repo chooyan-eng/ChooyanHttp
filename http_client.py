@@ -10,8 +10,13 @@ class ChooyanHttpClient:
 
         request_str = 'GET / HTTP/1.1\nHost: %s\r\n\r\n' % (host)
         s.send(request_str.encode('utf-8'))
-        response = s.recv(4096)
+        data = []
 
+        while True:
+            chunk = s.recv(4096)
+            data.append(chunk)
+
+        response.body = b''.join(data)
         return response
 
 class ChooyanResponse:
